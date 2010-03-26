@@ -1,0 +1,14 @@
+digraph doorsensornodes {
+  fontsize = 26
+  fontname = UbuntuMono
+  node [ shape = "record", style="rounded,filled" fillcolor=DarkRed target="_graphviz" fontcolor=white color=white]
+
+  subgraph clusterGraph {
+    label = "domain.name"
+    style="rounded,filled"   fillcolor=Khaki
+
+    aservernode [fillcolor="Crimson" fontcolor=Black color=Black  label = "{ServerNode}"]
+    anode [label="{Node}"]
+    ahardware [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Hardware}"]
+  }
+}

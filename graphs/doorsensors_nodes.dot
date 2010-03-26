@@ -1,0 +1,148 @@
+digraph doorsensornodes {
+  fontsize = 26
+  fontname = UbuntuMono
+  node [ shape = "record", style="rounded,filled" fillcolor=DarkRed target="_graphviz" fontcolor=white color=white]
+
+/**** Nodes and Clusters *****/
+
+  subgraph clustervex {
+    label = "vex.realraum.at"
+    style="rounded,filled"   fillcolor=Khaki
+
+    apache [fillcolor="Crimson" fontcolor=Black color=Black  label = "{Apache Webserver|http://realraum.at/|serves status.json}" href="http://realraum.at/status.json"]
+  }
+
+  subgraph clustermqtt {
+    label = "mqtt.realraum.at  aka  smsgw.realraum.at"
+    style="rounded,filled"   fillcolor=Khaki
+
+    /* Software */
+    smstools [label = "{smstools|Send SMS via T68i and HOT-Sim}"]
+    mosquito [label = "{Mosquito|MQTT broker}" fillcolor="Crimson" fontcolor=Black color=Black]
+    backdoorcx_sensor_node [label="{backdoorcx_sensor_node|ClientID: backdoorcx}" href="https://github.com/realraum/door_and_sensors/tree/master/backdoorcx_sensor_node"]
+    r3_metaevt_maker [label="{r³-MetaEvt-Makert|ClientID: metaevt|creates MQTT messages\lbased on other MQTT messages\l}" href="https://github.com/realraum/door_and_sensors/tree/master/r3-metaevt-maker"]
+    r3_spaceapistatus [label="{r³-SpaceAPIStatus|create SpaceAPI JSON\lfrom sensordata\l}" href="https://github.com/realraum/door_and_sensors/tree/master/r3-spaceapistatus"]
+    r3_xmppbot [label="{r³-XMPPBot|ClientID: xmppbot| xmpp://realrauminfo@realraum.at}" href="https://github.com/realraum/door_and_sensors/tree/master/r3-spaceapistatus"]
+    dostuff_switch_lights [label="{dostuff_switch_lights.py|turns mqtt messages\linto http calls to golightctrl}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/dostuff_switch_lights.py"]
+    olga_freezer_sensordata_forwarder  [label="{olga_freezer_sensordata_forwarder.py|ClientID: olgafreezer|Temperature\lOverTemp Alarm\lSensorLost Alarm\l}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/olga_freezer_sensordata_forwarder.py"]
+    apcupsd_mqtt_notify  [label="{apcupsd-mqtt-notify.py|ClientID: -|repackage as mqtt\lsend SMS on powerloss}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/apcupsd-mqtt-notify.py"]
+
+    /* Hardware */
+    backdoorminimus [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Minimus32|BackdoorAjar\lGasAlert\lCX Temperature\l}"]
+    YellowUPS [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{YellowUPS|PowerInfo\lBatteryTemp\l}"]
+  }
+
+  subgraph clustertuer {
+    label = "tuer.realraum.at"
+    style="rounded,filled"   fillcolor=Khaki
+
+    /* Software */
+    door_client  [href="https://github.com/realraum/door_and_sensors/tree/master/door_client"]
+    door_daemon  [label="{door_daemon|ClientID: frontdoor}" href="https://github.com/realraum/door_and_sensors/tree/master/door_daemon"]
+
+    /* Hardware */
+    teenstep [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{r³-TeenStep|Custom ATMega32U Board\lwith StepperDriver\lreads RFID Cards\lcontrols DoorLock\lreads AJAR Sensor\l}" href="https://github.com/realraum/teenstep"]
+  }
+
+  subgraph clusterlicht {
+    label = "licht.realraum.at"
+    style="rounded,filled"   fillcolor=Khaki
+
+    /* Software */
+    golightctrl  [fillcolor="Crimson" fontcolor=Black color=Black label="{goLightCtrl|http://licht.realraum.at|Power-,Light-,Stereo-\lcontrol Frontend\lserializes rf433 tx\l}" href="https://github.com/realraum/deckenlichtschalter/tree/master/linux/golightctrl"]
+    play_sound_status  [label="{play_sound_status.py|read play_sound_status.cfg\lplay jingle when\luser unlocks door\l}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/play-sound-status.py"]
+
+    /* Hardware */
+    ceilingteensy [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Teensy2|Ceilinglights\lRF433 TX}" href="https://github.com/realraum/deckenlichtschalter/tree/master/teensy2"]
+  }
+
+  subgraph clusterkiosk {
+    label = "kiosk.realraum.at"
+    style="rounded,filled"   fillcolor=Khaki
+
+    /* Software */
+    arduinosensors [label = "{ArduinoSensors.py|ClientID: pillar|Temp,Humidity}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/arduinosensors.py"]
+    xbeesensors [label = "{XbeeSensors.py|ClientID: xbee|remote Temp\lremote Humidity\l}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/xbeesensors.py"]
+
+    /* Hardware */
+    pillararduino [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Arduino|Lightlevel\lRF433 TX\lYamahaStereo IR tx\lBoreDoooomButton\l}"]
+  }
+
+  subgraph clusterlaser {
+    style="rounded,filled"   fillcolor=Khaki
+    label = "lasercutter.realraum.at"
+
+    /* Software */
+    laserctl [label = "{lasermon.py|ClientID: lasercutter|LaserCardEvent}" href="https://github.com/realraum/laserctl/tree/master/raspberry/laser"]
+  }
+
+    subgraph clusterolgafreezer {
+        style="rounded,filled"   fillcolor=Khaki
+        label="olgafreezer.realraum.at"
+
+        /* Hardware */
+        olgafreezerarduino [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Seeduino (POE, ENC28J60)|olgafreezer.realraum.at|Temperatures-\ldisplay and alert\l}" href="https://github.com/realraum/olgafreezer_httpPOEtempsensor"]
+    }
+
+  subgraph clusterthinkpi {
+    label = "dhcp-12.realraum.at\lthinkpi.realraum.at"
+    style="rounded,filled"   fillcolor="Khaki"
+
+    /* Software */
+    ircbot [label = "{IRC r3bot-mqtt|ClientID: ircchanbot|Limnoria IRC Bot Plugin}" href="https://github.com/realraum/r3bot-mqtt"]
+  }
+
+   /* Hardware */
+  outsidexbee [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Xbee TunnelFIO Node|Temperature\lHumidity\l}"]
+
+
+/*
+  subgraph clustergw {
+    style="rounded,filled"   fillcolor=Khaki
+    label = "gw.realraum.at"
+  }
+*/
+
+
+
+/**** Edges *****/
+
+ /* Serial Connections */
+  pillararduino -> arduinosensors -> pillararduino [label="ttyUSB0" color="red"]
+  outsidexbee -> xbeesensors  [label="ttyUSB1\lZigBee" color="red" style="dotted"]
+  backdoorminimus -> backdoorcx_sensor_node [label="ttyACM0" color="red"]
+  golightctrl -> ceilingteensy [label="ttyACM0" color="red"]
+  ceilingteensy -> golightctrl [label="ttyACM1"  color="red"]
+  YellowUPS -> apcupsd_mqtt_notify [label="APC"  color="red"]
+  teenstep -> door_daemon -> teenstep [label="ttyACM0" color="red"]
+
+/* Shell call, remote shell calls, etc */
+  r3_spaceapistatus -> apache [color="black" style="dotted" label="ssh"]
+  olga_freezer_sensordata_forwarder -> smstools [color = "black"]
+  apcupsd_mqtt_notify -> smstools [color = "black"]
+
+/* MQTT Messages */
+  backdoorcx_sensor_node -> mosquito [color = "green"]
+  mosquito -> r3_metaevt_maker -> mosquito  [color = "green"]
+  mosquito -> r3_spaceapistatus  [color = "green"]
+  mosquito -> r3_xmppbot  [color = "green"]
+  mosquito -> dostuff_switch_lights  [color = "green"]
+  olga_freezer_sensordata_forwarder -> mosquito  [color = "green"]
+  apcupsd_mqtt_notify -> mosquito  [color = "green"]
+  door_daemon -> mosquito  [color = "green"]
+  golightctrl -> mosquito  [color = "green"]
+  mosquito -> arduinosensors  [color = "green"]
+  arduinosensors -> mosquito  [color = "green"]
+  xbeesensors -> mosquito  [color = "green"]
+  laserctl -> mosquito  [color = "green"]
+  mosquito -> play_sound_status  [color = "green"]
+  mosquito -> ircbot  [color = "green"]
+
+/* RPC */
+  door_client -> door_daemon [label="RPC" color="DeepPink"]
+
+/* HTTP */
+olgafreezerarduino -> olga_freezer_sensordata_forwarder  [label="HTTP" color="Blue"]
+dostuff_switch_lights -> golightctrl [label="HTTP" color="Blue"]
+
+}
