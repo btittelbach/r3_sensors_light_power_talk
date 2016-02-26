@@ -26,6 +26,7 @@ digraph doorsensornodes {
     dostuff_switch_lights [label="{dostuff_switch_lights.py|turns mqtt messages\linto http calls to golightctrl}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/dostuff_switch_lights.py"]
     olga_freezer_sensordata_forwarder  [label="{olga_freezer_sensordata_forwarder.py|ClientID: olgafreezer|Temperature\lOverTemp Alarm\lSensorLost Alarm\l}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/olga_freezer_sensordata_forwarder.py"]
     apcupsd_mqtt_notify  [label="{apcupsd-mqtt-notify.py|ClientID: -|repackage as mqtt\lsend SMS on powerloss}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/apcupsd-mqtt-notify.py"]
+    xbeesensors [label = "{XbeeSensors.py|ClientID: xbee|remote Temp\lremote Humidity\l}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/xbeesensors.py"]
 
     /* Hardware */
     backdoorminimus [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Minimus32|BackdoorAjar\lGasAlert\lCX Temperature\l}"]
@@ -62,7 +63,6 @@ digraph doorsensornodes {
 
     /* Software */
     arduinosensors [label = "{ArduinoSensors.py|ClientID: pillar|Temp,Humidity}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/arduinosensors.py"]
-    xbeesensors [label = "{XbeeSensors.py|ClientID: xbee|remote Temp\lremote Humidity\l}" href="https://github.com/realraum/door_and_sensors/blob/master/scripts/xbeesensors.py"]
 
     /* Hardware */
     pillararduino [style="filled" fillcolor="DodgerBlue" color=black fontcolor=black label = "{Arduino|Lightlevel\lRF433 TX\lYamahaStereo IR tx\lBoreDoooomButton\l}"]
